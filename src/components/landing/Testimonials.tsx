@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useCallback } from "react";
 import SectionHeading from "@/components/shared/SectionHeading";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 
@@ -36,6 +39,37 @@ function VerifiedBadge() {
 }
 
 export default function Testimonials({ dict, locale }: TestimonialsProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const direction = useRef<"h" | "v" | null>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    direction.current = null;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const dx = Math.abs(e.touches[0].clientX - touchStart.current.x);
+    const dy = Math.abs(e.touches[0].clientY - touchStart.current.y);
+    // Wait for enough movement to determine direction
+    if (!direction.current && (dx > 8 || dy > 8)) {
+      direction.current = dx > dy ? "h" : "v";
+      if (direction.current === "v" && scrollRef.current) {
+        // Vertical swipe: disable horizontal scroll so page scrolls normally
+        scrollRef.current.style.overflowX = "hidden";
+      }
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    touchStart.current = null;
+    direction.current = null;
+    if (scrollRef.current) {
+      scrollRef.current.style.overflowX = "auto";
+    }
+  }, []);
+
   return (
     <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -49,7 +83,13 @@ export default function Testimonials({ dict, locale }: TestimonialsProps) {
 
         {/* Desktop grid / Mobile horizontal carousel */}
         <div className="mt-16 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 overscroll-x-contain sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:overflow-x-visible sm:overscroll-auto">
+          <div
+            ref={scrollRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:overflow-x-visible"
+          >
             {dict.items.map((t, i) => (
               <AnimateOnScroll key={t.name} delay={i * 100}>
                 {/* Outer wrapper with animated gradient border */}
