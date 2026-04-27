@@ -198,7 +198,7 @@ export default function FeatureTabs() {
 
           {/* Right - iPhone screenshot (desktop only) */}
           <AnimateOnScroll delay={200} className="hidden lg:flex justify-center">
-            <div className="relative w-[420px] h-auto">
+            <div className="relative w-80 h-auto">
               {features.map((feature, index) => (
                 <div
                   key={feature.id}
@@ -211,8 +211,8 @@ export default function FeatureTabs() {
                   <Image
                     src={feature.image}
                     alt={feature.title}
-                    width={420}
-                    height={840}
+                    width={320}
+                    height={640}
                     className="w-full h-auto rounded-3xl"
                     priority={index === 0}
                   />
