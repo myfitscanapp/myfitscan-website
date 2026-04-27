@@ -38,7 +38,7 @@ export default function HeroSection({ dict, commonDict }: HeroSectionProps) {
               {dict.badge}
             </span>
 
-            <h1 className="mt-6 font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text leading-[1.1] tracking-tight">
+            <h1 className="mt-6 font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text leading-[1.1] tracking-tight">
               {dict.titleLine1}
               <br />
               <span className="text-accent">{dict.titleLine2}</span>
