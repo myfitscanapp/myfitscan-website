@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import AppStoreButtons from "@/components/shared/AppStoreButtons";
 
 const productLinks = [
   { href: "/fonctionnalites", label: "Fonctionnalités" },
@@ -10,6 +9,7 @@ const productLinks = [
 const companyLinks = [
   { href: "/a-propos", label: "À propos" },
   { href: "/support", label: "Support" },
+  { href: "/ambassadeur", label: "Ambassadeur" },
 ];
 
 const legalLinks = [
@@ -21,29 +21,50 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="relative bg-dark text-white overflow-hidden">
+      {/* Subtle coral glow */}
+      <div className="absolute -top-40 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 right-1/3 w-80 h-80 bg-accent/3 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Link href="/" className="inline-block">
               <Image
-                src="/images/logo-slogan-black-c.png"
+                src="/images/logo-white-slogan.png"
                 alt="MyFitScan"
                 width={140}
                 height={40}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-10 w-auto object-contain"
               />
             </Link>
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
               Ton coach fitness propulsé par l&apos;intelligence artificielle.
             </p>
-            <div className="mt-5">
-              <AppStoreButtons size="small" />
+            <div className="mt-5 flex items-center gap-3">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 h-9 text-white text-xs hover:border-white/40 transition-colors"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                App Store
+              </a>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 h-9 text-white text-xs hover:border-white/40 transition-colors"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 010 1.38l-2.302 2.302L15.088 12l2.61-2.492zM5.864 2.658L16.8 9.99l-2.302 2.302-8.634-8.634z" />
+                </svg>
+                Google Play
+              </a>
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-accent/70 mb-4">
               Produit
             </h3>
             <ul className="space-y-3">
@@ -61,7 +82,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-accent/70 mb-4">
               Entreprise
             </h3>
             <ul className="space-y-3">
@@ -79,7 +100,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-accent/70 mb-4">
               Légal
             </h3>
             <ul className="space-y-3">
@@ -98,22 +119,14 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <p className="text-sm text-text-muted">
-              &copy; {new Date().getFullYear()} DMC Digital LLC. Tous droits
-              réservés.
-            </p>
-            <span className="hidden sm:inline text-gray-600">|</span>
-            <p className="text-sm text-text-muted flex items-center gap-1.5">
-              Made with
-              <span className="text-accent">&#9829;</span>
-              from Bali
-            </p>
-          </div>
+          <p className="text-sm text-text-muted">
+            &copy; {new Date().getFullYear()} DMC Digital LLC. Tous droits
+            réservés.
+          </p>
           <div className="flex items-center gap-4">
             <a
               href="#"
-              className="text-text-muted hover:text-white transition-colors"
+              className="text-text-muted hover:text-accent transition-colors"
               aria-label="Instagram"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -122,7 +135,7 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="text-text-muted hover:text-white transition-colors"
+              className="text-text-muted hover:text-accent transition-colors"
               aria-label="Twitter"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -131,7 +144,7 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="text-text-muted hover:text-white transition-colors"
+              className="text-text-muted hover:text-accent transition-colors"
               aria-label="TikTok"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
