@@ -130,7 +130,7 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                   <button
                     key={feature.id}
                     onClick={() => goToTab(index)}
-                    className={`w-full text-left rounded-2xl border transition-colors duration-300 overflow-hidden ${
+                    className={`w-full text-left rounded-2xl border transition-colors duration-300 ${
                       isActive
                         ? "bg-white border-accent/20 shadow-lg"
                         : "bg-white/50 border-glass-border hover:bg-white/80"
@@ -164,35 +164,31 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                       </svg>
                     </div>
 
-                    {/* Expanded content */}
-                    <div
-                      className={`overflow-hidden transition-[max-height] duration-500 ${
-                        isActive ? "max-h-[420px] lg:max-h-60" : "max-h-0"
-                      }`}
-                    >
-                      <div className="px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
-                        <p className="text-sm text-text-secondary leading-relaxed">
-                          {feature.description}
-                        </p>
-                        {/* Mobile inline screenshot */}
-                        <div className="lg:hidden flex justify-center mt-3">
+                    {/* Expanded content — conditional render for instant collapse */}
+                    {isActive && (
+                      <div className="animate-[fadeIn_0.25s_ease-out] px-3 pb-3 sm:px-5 sm:pb-5">
+                        <div className="flex gap-3 items-start">
+                          <p className="text-sm text-text-secondary leading-relaxed flex-1">
+                            {feature.description}
+                          </p>
+                          {/* Mobile inline screenshot */}
                           <Image
                             src={feature.image}
                             alt={feature.title}
-                            width={160}
-                            height={320}
-                            className="w-28 h-auto rounded-2xl shadow-md"
+                            width={100}
+                            height={200}
+                            className="lg:hidden w-16 h-auto rounded-xl shadow-md flex-shrink-0"
                           />
                         </div>
                         {/* Progress bar */}
-                        <div className="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="mt-2 h-1 bg-gray-100 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-accent rounded-full transition-all duration-100 ease-linear"
-                            style={{ width: `${isActive ? progress : 0}%` }}
+                            style={{ width: `${progress}%` }}
                           />
                         </div>
                       </div>
-                    </div>
+                    )}
                   </button>
                 );
               })}
