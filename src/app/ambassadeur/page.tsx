@@ -18,7 +18,7 @@ const benefits = [
     ),
     title: "Commissions attractives",
     description:
-      "Gagne jusqu'à 30% de commission récurrente sur chaque abonnement généré via ton lien unique.",
+      "Gagne jusqu'à 20% de commission récurrente sur chaque abonnement généré via ton lien unique.",
   },
   {
     icon: (
@@ -106,7 +106,7 @@ const faq = [
   },
   {
     q: "Combien puis-je gagner ?",
-    a: "Tu gagnes 30% de commission récurrente sur chaque abonnement généré. Certains ambassadeurs gagnent plus de 2 000 EUR/mois.",
+    a: "Tu gagnes 20% de commission récurrente sur chaque abonnement généré. Certains ambassadeurs gagnent plus de 2 000 EUR/mois.",
   },
   {
     q: "Comment fonctionne le suivi ?",
@@ -168,7 +168,7 @@ export default function AmbassadeurPage() {
                   <svg className="h-5 w-5 text-green" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                   </svg>
-                  30% de commission
+                  20% de commission
                 </span>
                 <span className="flex items-center gap-1.5">
                   <svg className="h-5 w-5 text-green" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">

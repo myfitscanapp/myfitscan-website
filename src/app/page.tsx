@@ -2,6 +2,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import SocialProof from "@/components/landing/SocialProof";
 import FeatureTabs from "@/components/landing/FeatureTabs";
 import Testimonials from "@/components/landing/Testimonials";
+import AmbassadorBanner from "@/components/landing/AmbassadorBanner";
 import CTABanner from "@/components/landing/CTABanner";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
       <SocialProof />
       <FeatureTabs />
       <Testimonials />
+      <AmbassadorBanner />
       <CTABanner />
 
       <script
