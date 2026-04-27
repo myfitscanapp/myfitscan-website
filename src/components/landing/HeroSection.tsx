@@ -22,7 +22,7 @@ export default function HeroSection() {
           <div className="animate-fade-in-up">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-sm border border-glass-border px-4 py-1.5 text-sm font-medium text-text-secondary">
               <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse" />
-              Propulse par l&apos;intelligence artificielle
+              Propulsé par l&apos;intelligence artificielle
             </span>
 
             <h1 className="mt-6 font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text leading-[1.1] tracking-tight">
@@ -34,7 +34,7 @@ export default function HeroSection() {
             <p className="mt-6 text-lg sm:text-xl text-text-secondary leading-relaxed max-w-xl">
               MyFitScan combine scan corporel IA, suivi calorique photo et
               coaching personnel pour t&apos;offrir un accompagnement
-              personnalise et durable.
+              personnalisé et durable.
             </p>
 
             <div className="mt-8">
@@ -60,7 +60,7 @@ export default function HeroSection() {
               </div>
               <p className="text-sm text-text-secondary">
                 <span className="font-semibold text-text">+100 000</span>{" "}
-                utilisateurs nous font deja confiance
+                utilisateurs nous font déjà confiance
               </p>
             </div>
           </div>

@@ -12,7 +12,7 @@ const features = [
     id: "bodyscan",
     title: "BodyScan IA",
     description:
-      "Analyse complete de ta composition corporelle en 2 photos grace a l'IA. Obtiens ton score, ton type morphologique et des recommandations personnalisees.",
+      "Analyse complète de ta composition corporelle en 2 photos grâce à l'IA. Obtiens ton score, ton type morphologique et des recommandations personnalisées.",
     image: "/images/iphone-1-bodyscan.png",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -24,7 +24,7 @@ const features = [
     id: "foodscan",
     title: "FoodScan",
     description:
-      "Prends en photo ton repas et obtiens instantanement calories et macros. Plus besoin de peser ou chercher dans une base de donnees.",
+      "Prends en photo ton repas et obtiens instantanément calories et macros. Plus besoin de peser ou chercher dans une base de données.",
     image: "/images/iphone-2-foodscan.png",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -37,7 +37,7 @@ const features = [
     id: "coach",
     title: "MyCoach IA",
     description:
-      "Ton coach personnel disponible 24/7 pour t'accompagner au quotidien. Pose tes questions nutrition, entrainement ou motivation.",
+      "Ton coach personnel disponible 24/7 pour t'accompagner au quotidien. Pose tes questions nutrition, entraînement ou motivation.",
     image: "/images/iphone-3-mycoach.png",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -49,7 +49,7 @@ const features = [
     id: "calendar",
     title: "Suivi & Calendar",
     description:
-      "Suis tes progres jour apres jour avec un calendrier nutritionnel complet. Visualise ton historique et reste motive.",
+      "Suis tes progrès jour après jour avec un calendrier nutritionnel complet. Visualise ton historique et reste motivé.",
     image: "/images/iphone-4-calendar_suivi.png",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -104,14 +104,14 @@ export default function FeatureTabs() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeading
-            badge="Fonctionnalites"
-            title="Tout est pense pour toi"
-            subtitle="Des outils puissants propulses par l'IA, concus pour t'aider a atteindre tes objectifs."
+            badge="Fonctionnalités"
+            title="Tout est pensé pour toi"
+            subtitle="Des outils puissants propulsés par l'IA, conçus pour t'aider à atteindre tes objectifs."
           />
         </AnimateOnScroll>
 
         <div
-          className="mt-16 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          className="mt-16 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -184,7 +184,7 @@ export default function FeatureTabs() {
                               alt={feature.title}
                               width={280}
                               height={560}
-                              className="w-full h-auto rounded-2xl shadow-xl"
+                              className="w-full h-auto rounded-2xl"
                             />
                           </div>
                         </div>
@@ -198,7 +198,7 @@ export default function FeatureTabs() {
 
           {/* Right - iPhone screenshot (desktop only) */}
           <AnimateOnScroll delay={200} className="hidden lg:flex justify-center">
-            <div className="relative w-72 h-auto">
+            <div className="relative w-[420px] h-auto">
               {features.map((feature, index) => (
                 <div
                   key={feature.id}
@@ -211,9 +211,9 @@ export default function FeatureTabs() {
                   <Image
                     src={feature.image}
                     alt={feature.title}
-                    width={320}
-                    height={640}
-                    className="w-full h-auto rounded-3xl shadow-2xl"
+                    width={420}
+                    height={840}
+                    className="w-full h-auto rounded-3xl"
                     priority={index === 0}
                   />
                 </div>

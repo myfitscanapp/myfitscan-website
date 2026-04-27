@@ -29,7 +29,7 @@ const stats = [
   {
     value: 2000000,
     suffix: "+",
-    label: "Repas analyses",
+    label: "Repas analysés",
     display: "2M+",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -41,7 +41,7 @@ const stats = [
   {
     value: 500000,
     suffix: "+",
-    label: "Scans realises",
+    label: "Scans réalisés",
     display: "500K+",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">

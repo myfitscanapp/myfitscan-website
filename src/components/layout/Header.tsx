@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
 
 const navLinks = [
-  { href: "/fonctionnalites", label: "Fonctionnalites" },
+  { href: "/fonctionnalites", label: "Fonctionnalités" },
   { href: "/tarifs", label: "Tarifs" },
-  { href: "/a-propos", label: "A propos" },
+  { href: "/a-propos", label: "À propos" },
   { href: "/support", label: "Support" },
 ];
 
 const marqueeItems = [
   "Essai gratuit 3 jours",
-  "Propulse par l'IA",
+  "Propulsé par l'IA",
   "+100 000 utilisateurs",
   "Scan corporel en 2 photos",
   "Coach IA disponible 24/7",
@@ -87,7 +87,7 @@ export default function Header() {
                 href="#"
                 className="inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,122,92,0.4)]"
               >
-                Telecharger l&apos;app
+                Télécharger l&apos;app
               </Link>
             </div>
 

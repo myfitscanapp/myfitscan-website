@@ -34,7 +34,7 @@ export default function HomePage() {
               ratingCount: "12500",
             },
             description:
-              "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour un accompagnement personnalise et durable.",
+              "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour un accompagnement personnalisé et durable.",
           }),
         }}
       />
