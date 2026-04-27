@@ -1,34 +1,53 @@
 import Link from "next/link";
+import Image from "next/image";
 import AppStoreButtons from "@/components/shared/AppStoreButtons";
 
 const productLinks = [
-  { href: "/fonctionnalites", label: "Fonctionnalités" },
+  { href: "/fonctionnalites", label: "Fonctionnalites" },
   { href: "/tarifs", label: "Tarifs" },
 ];
 
 const companyLinks = [
-  { href: "/a-propos", label: "À propos" },
+  { href: "/a-propos", label: "A propos" },
   { href: "/support", label: "Support" },
 ];
 
 const legalLinks = [
-  { href: "/mentions-legales", label: "Mentions légales" },
-  { href: "/politique-de-confidentialite", label: "Confidentialité" },
+  { href: "/mentions-legales", label: "Mentions legales" },
+  { href: "/politique-de-confidentialite", label: "Confidentialite" },
   { href: "/conditions-utilisation", label: "CGU" },
   { href: "/cgv", label: "CGV" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="relative overflow-hidden">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/myfitscangroup-background-1.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-black/90" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Link href="/" className="font-heading text-xl font-bold">
-              MyFitScan
+            <Link href="/" className="inline-block">
+              <Image
+                src="/images/logo-slogan-black-c.png"
+                alt="MyFitScan"
+                width={140}
+                height={40}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </Link>
-            <p className="mt-3 text-sm text-text-muted leading-relaxed">
-              Ton coach fitness propulsé par l&apos;intelligence artificielle.
+            <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+              Ton coach fitness propulse par l&apos;intelligence artificielle.
             </p>
             <div className="mt-5">
               <AppStoreButtons size="small" />
@@ -36,7 +55,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
               Produit
             </h3>
             <ul className="space-y-3">
@@ -44,7 +63,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -54,7 +73,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
               Entreprise
             </h3>
             <ul className="space-y-3">
@@ -62,7 +81,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -72,15 +91,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-4">
-              Légal
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
+              Legal
             </h3>
             <ul className="space-y-3">
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -91,14 +110,22 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-text-muted">
-            &copy; {new Date().getFullYear()} DMC Digital LLC. Tous droits
-            réservés.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-sm text-gray-400">
+              &copy; {new Date().getFullYear()} DMC Digital LLC. Tous droits
+              reserves.
+            </p>
+            <span className="hidden sm:inline text-gray-600">|</span>
+            <p className="text-sm text-gray-400 flex items-center gap-1.5">
+              Made with
+              <span className="text-accent">&#9829;</span>
+              from Bali
+            </p>
+          </div>
           <div className="flex items-center gap-4">
             <a
               href="#"
-              className="text-text-muted hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors"
               aria-label="Instagram"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -107,7 +134,7 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="text-text-muted hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors"
               aria-label="Twitter"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -116,7 +143,7 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="text-text-muted hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors"
               aria-label="TikTok"
             >
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

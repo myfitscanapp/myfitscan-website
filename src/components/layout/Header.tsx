@@ -1,29 +1,73 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
 
 const navLinks = [
-  { href: "/fonctionnalites", label: "Fonctionnalités" },
+  { href: "/fonctionnalites", label: "Fonctionnalites" },
   { href: "/tarifs", label: "Tarifs" },
-  { href: "/a-propos", label: "À propos" },
+  { href: "/a-propos", label: "A propos" },
   { href: "/support", label: "Support" },
+];
+
+const marqueeItems = [
+  "Essai gratuit 3 jours",
+  "Propulse par l'IA",
+  "+100 000 utilisateurs",
+  "Scan corporel en 2 photos",
+  "Coach IA disponible 24/7",
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-glass-border">
+      {/* Animated top bar */}
+      <div className="bg-dark text-white text-xs overflow-hidden relative z-50">
+        <div className="animate-marquee flex whitespace-nowrap py-2">
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span key={i} className="mx-8 flex items-center gap-2">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <header
+        className={`sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-glass-border transition-all duration-300 ${
+          scrolled ? "shadow-lg" : ""
+        }`}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <Link
-              href="/"
-              className="font-heading text-xl font-bold text-text"
-            >
-              MyFitScan
+          <div
+            className={`flex items-center justify-between transition-all duration-300 ${
+              scrolled ? "h-14" : "h-16"
+            }`}
+          >
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/images/logo-slogan-black-c.png"
+                alt="MyFitScan"
+                width={140}
+                height={40}
+                className={`transition-all duration-300 object-contain ${
+                  scrolled ? "h-8 w-auto" : "h-10 w-auto"
+                }`}
+                priority
+              />
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
@@ -41,9 +85,9 @@ export default function Header() {
             <div className="hidden md:block">
               <Link
                 href="#"
-                className="inline-flex items-center rounded-full bg-text px-5 py-2.5 text-sm font-medium text-white hover:bg-dark-secondary transition-colors"
+                className="inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,122,92,0.4)]"
               >
-                Télécharger l&apos;app
+                Telecharger l&apos;app
               </Link>
             </div>
 

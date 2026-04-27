@@ -1,7 +1,6 @@
 import HeroSection from "@/components/landing/HeroSection";
 import SocialProof from "@/components/landing/SocialProof";
-import FeatureGrid from "@/components/landing/FeatureGrid";
-import AllInOneSection from "@/components/landing/AllInOneSection";
+import FeatureTabs from "@/components/landing/FeatureTabs";
 import Testimonials from "@/components/landing/Testimonials";
 import CTABanner from "@/components/landing/CTABanner";
 
@@ -10,8 +9,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <SocialProof />
-      <FeatureGrid />
-      <AllInOneSection />
+      <FeatureTabs />
       <Testimonials />
       <CTABanner />
 
@@ -36,7 +34,7 @@ export default function HomePage() {
               ratingCount: "12500",
             },
             description:
-              "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour un accompagnement personnalisé et durable.",
+              "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour un accompagnement personnalise et durable.",
           }),
         }}
       />

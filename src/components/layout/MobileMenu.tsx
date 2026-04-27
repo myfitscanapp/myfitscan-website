@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
 
 interface MobileMenuProps {
@@ -35,7 +36,13 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-glass-border">
-          <span className="font-heading text-lg font-bold">MyFitScan</span>
+          <Image
+                src="/images/logo-slogan-black-c.png"
+                alt="MyFitScan"
+                width={120}
+                height={34}
+                className="h-8 w-auto object-contain"
+              />
           <button
             type="button"
             onClick={onClose}
@@ -73,7 +80,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
             <Link
               href="#"
               onClick={onClose}
-              className="block w-full rounded-full bg-text px-5 py-3 text-center text-sm font-medium text-white hover:bg-dark-secondary transition-colors"
+              className="block w-full rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-white hover:bg-accent-dark transition-colors"
             >
               Télécharger l&apos;app
             </Link>
