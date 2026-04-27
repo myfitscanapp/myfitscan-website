@@ -14,6 +14,7 @@ const features = [
     description:
       "Analyse complète de ta composition corporelle en 2 photos grâce à l'IA. Obtiens ton score, ton type morphologique et des recommandations personnalisées.",
     image: "/images/iphone-1-bodyscan.png",
+    tall: true,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
@@ -26,6 +27,7 @@ const features = [
     description:
       "Prends en photo ton repas et obtiens instantanément calories et macros. Plus besoin de peser ou chercher dans une base de données.",
     image: "/images/iphone-2-foodscan.png",
+    tall: true,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
@@ -39,6 +41,7 @@ const features = [
     description:
       "Ton coach personnel disponible 24/7 pour t'accompagner au quotidien. Pose tes questions nutrition, entraînement ou motivation.",
     image: "/images/iphone-3-mycoach.png",
+    tall: true,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
@@ -198,22 +201,24 @@ export default function FeatureTabs() {
 
           {/* Right - iPhone screenshot (desktop only) */}
           <AnimateOnScroll delay={200} className="hidden lg:flex justify-center items-center">
-            <div className="relative w-72 max-h-[580px] flex items-center justify-center">
+            <div className="relative flex items-center justify-center" style={{ width: 400, height: 580 }}>
               {features.map((feature, index) => (
                 <div
                   key={feature.id}
-                  className={`transition-all duration-500 ${
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
                     index === activeIndex
                       ? "opacity-100 scale-100"
-                      : "opacity-0 scale-95 absolute inset-0 flex items-center justify-center"
+                      : "opacity-0 scale-95"
                   }`}
                 >
                   <Image
                     src={feature.image}
                     alt={feature.title}
-                    width={288}
+                    width={feature.tall ? 260 : 400}
                     height={580}
-                    className="w-auto h-auto max-h-[580px] max-w-full rounded-3xl object-contain"
+                    className={`h-auto rounded-3xl object-contain ${
+                      feature.tall ? "max-h-[580px] w-auto" : "max-h-[580px] w-auto"
+                    }`}
                     priority={index === 0}
                   />
                 </div>
