@@ -1,6 +1,6 @@
 const de = {
   metadata: {
-    siteTitle: "MyFitScan — Erreiche deine Ziele. Jeden Tag.",
+    siteTitle: "MyFitScan — Dein Personalisiertes Ernährungsprogramm. Durch Körper-Scan.",
     siteDescription: "MyFitScan kombiniert KI-Körperscan, Foto-Kalorientracking und persönliches Coaching für eine personalisierte und nachhaltige Betreuung.",
     ogAlt: "MyFitScan — Dein KI-Fitness-Coach",
   },
@@ -47,8 +47,8 @@ const de = {
   home: {
     hero: {
       badge: "Angetrieben durch künstliche Intelligenz",
-      titleLine1: "Erreiche deine Ziele.",
-      titleLine2: "Jeden Tag.",
+      titleLine1: "Dein Personalisiertes Ernährungsprogramm.",
+      titleLine2: "Durch Körper-Scan.",
       description: "MyFitScan kombiniert KI-Körperscan, Foto-Kalorientracking und persönliches Coaching für eine personalisierte und nachhaltige Betreuung.",
       usersCount: "100.000+",
       usersTrust: "Nutzer vertrauen uns bereits",
@@ -128,7 +128,7 @@ const de = {
       cta: "Dem Programm beitreten",
     },
     ctaBanner: {
-      title: "Bereit, dein Leben zu verändern?",
+      title: "Starte jetzt deine Transformation",
       description: "Schließe dich den Tausenden von Nutzern an, die ihren Alltag mit MyFitScan bereits verändert haben. 3 Tage kostenlos testen.",
     },
   },

@@ -1,6 +1,6 @@
 const en = {
   metadata: {
-    siteTitle: "MyFitScan — Reach your goals. Every day.",
+    siteTitle: "MyFitScan — Your Personalized Nutrition Program. By Scanning Your Body.",
     siteDescription: "MyFitScan combines AI body scan, photo calorie tracking and personal coaching for a personalized and sustainable experience.",
     ogAlt: "MyFitScan — Your AI fitness coach",
   },
@@ -47,8 +47,8 @@ const en = {
   home: {
     hero: {
       badge: "Powered by artificial intelligence",
-      titleLine1: "Reach your goals.",
-      titleLine2: "Every day.",
+      titleLine1: "Your Personalized Nutrition Program.",
+      titleLine2: "By Scanning Your Body.",
       description: "MyFitScan combines AI body scan, photo calorie tracking and personal coaching to deliver a personalized and sustainable experience.",
       usersCount: "100,000+",
       usersTrust: "users already trust us",
@@ -128,7 +128,7 @@ const en = {
       cta: "Join the program",
     },
     ctaBanner: {
-      title: "Ready to change your life?",
+      title: "Start your transformation now",
       description: "Join the thousands of users who have already transformed their daily lives with MyFitScan. 3-day free trial.",
     },
   },

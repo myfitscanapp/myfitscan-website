@@ -1,6 +1,6 @@
 const fr = {
   metadata: {
-    siteTitle: "MyFitScan — Atteins tes objectifs. Chaque jour.",
+    siteTitle: "MyFitScan — Ton Programme Nutrition Personnalisé. En Scannant ton Corps.",
     siteDescription:
       "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour un accompagnement personnalis\u00e9 et durable.",
     ogAlt: "MyFitScan — Ton coach fitness IA",
@@ -55,8 +55,8 @@ const fr = {
   home: {
     hero: {
       badge: "Propuls\u00e9 par l\u2019intelligence artificielle",
-      titleLine1: "Atteins tes objectifs.",
-      titleLine2: "Chaque jour.",
+      titleLine1: "Ton Programme Nutrition Personnalisé.",
+      titleLine2: "En Scannant ton Corps.",
       description:
         "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour t\u2019offrir un accompagnement personnalis\u00e9 et durable.",
       usersCount: "+100 000",
@@ -156,7 +156,7 @@ const fr = {
     },
 
     ctaBanner: {
-      title: "Pr\u00eat \u00e0 changer ta vie ?",
+      title: "Commence ta transformation maintenant",
       description:
         "Rejoins les milliers d\u2019utilisateurs qui ont d\u00e9j\u00e0 transform\u00e9 leur quotidien avec MyFitScan. Essai gratuit de 3 jours.",
     },
