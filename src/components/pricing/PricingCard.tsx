@@ -6,6 +6,8 @@ interface PricingCardProps {
   features: string[];
   popular?: boolean;
   trial?: string;
+  buttonText?: string;
+  popularLabel?: string;
 }
 
 export default function PricingCard({
@@ -16,7 +18,12 @@ export default function PricingCard({
   features,
   popular = false,
   trial,
+  buttonText,
+  popularLabel,
 }: PricingCardProps) {
+  const ctaText = buttonText ?? "Commencer";
+  const badgeText = popularLabel ?? "Le plus populaire";
+
   return (
     <div
       className={`relative rounded-2xl border p-6 sm:p-8 flex flex-col ${
@@ -27,7 +34,7 @@ export default function PricingCard({
     >
       {popular && (
         <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-semibold text-white">
-          Le plus populaire
+          {badgeText}
         </span>
       )}
       <h3 className="font-heading text-lg font-bold text-text">{name}</h3>
@@ -69,7 +76,7 @@ export default function PricingCard({
             : "bg-text text-white hover:bg-dark-secondary"
         }`}
       >
-        Commencer
+        {ctaText}
       </a>
     </div>
   );

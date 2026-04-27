@@ -3,7 +3,17 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function CookieConsent() {
+interface CookieConsentProps {
+  dict: {
+    text: string;
+    privacyLink: string;
+    learnMore: string;
+    accept: string;
+  };
+  locale: string;
+}
+
+export default function CookieConsent({ dict, locale }: CookieConsentProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -24,28 +34,27 @@ export default function CookieConsent() {
     <div className="fixed bottom-0 inset-x-0 z-50 p-4">
       <div className="mx-auto max-w-4xl rounded-2xl bg-white/95 backdrop-blur-md border border-glass-border shadow-xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <p className="text-sm text-text-secondary flex-1">
-          Nous utilisons des cookies pour améliorer votre expérience sur notre
-          site. En continuant, vous acceptez notre{" "}
+          {dict.text}{" "}
           <Link
-            href="/politique-de-confidentialite"
+            href={`/${locale}/politique-de-confidentialite`}
             className="text-accent underline"
           >
-            politique de confidentialité
+            {dict.privacyLink}
           </Link>
           .
         </p>
         <div className="flex items-center gap-3 shrink-0">
           <Link
-            href="/politique-de-confidentialite"
+            href={`/${locale}/politique-de-confidentialite`}
             className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
           >
-            En savoir plus
+            {dict.learnMore}
           </Link>
           <button
             onClick={accept}
             className="rounded-full bg-accent px-5 py-2 text-sm font-medium text-white hover:bg-accent-dark transition-colors"
           >
-            Accepter
+            {dict.accept}
           </button>
         </div>
       </div>

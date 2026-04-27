@@ -7,12 +7,9 @@ import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 
 const AUTOPLAY_INTERVAL = 5000;
 
-const features = [
+const featureData = [
   {
     id: "bodyscan",
-    title: "BodyScan IA",
-    description:
-      "Analyse complète de ta composition corporelle en 2 photos grâce à l'IA. Obtiens ton score, ton type morphologique et des recommandations personnalisées.",
     image: "/images/iphone-1-bodyscan.png",
     tall: true,
     icon: (
@@ -23,9 +20,6 @@ const features = [
   },
   {
     id: "foodscan",
-    title: "FoodScan",
-    description:
-      "Prends en photo ton repas et obtiens instantanément calories et macros. Plus besoin de peser ou chercher dans une base de données.",
     image: "/images/iphone-2-foodscan.png",
     tall: true,
     icon: (
@@ -37,9 +31,6 @@ const features = [
   },
   {
     id: "coach",
-    title: "MyCoach IA",
-    description:
-      "Ton coach personnel disponible 24/7 pour t'accompagner au quotidien. Pose tes questions nutrition, entraînement ou motivation.",
     image: "/images/iphone-3-mycoach.png",
     tall: true,
     icon: (
@@ -50,9 +41,6 @@ const features = [
   },
   {
     id: "calendar",
-    title: "Suivi & Calendar",
-    description:
-      "Suis tes progrès jour après jour avec un calendrier nutritionnel complet. Visualise ton historique et reste motivé.",
     image: "/images/iphone-4-calendar_suivi.png",
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -62,12 +50,27 @@ const features = [
   },
 ];
 
-export default function FeatureTabs() {
+interface FeatureTabsProps {
+  dict: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    tabs: { title: string; description: string }[];
+  };
+}
+
+export default function FeatureTabs({ dict }: FeatureTabsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const features = featureData.map((f, i) => ({
+    ...f,
+    title: dict.tabs[i].title,
+    description: dict.tabs[i].description,
+  }));
 
   const goToTab = useCallback((index: number) => {
     setActiveIndex(index);
@@ -100,21 +103,21 @@ export default function FeatureTabs() {
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (progressRef.current) clearInterval(progressRef.current);
     };
-  }, [isPaused, activeIndex]);
+  }, [isPaused, activeIndex, features.length]);
 
   return (
     <section className="py-20 sm:py-28 bg-gradient-to-br from-hero-from to-hero-to">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeading
-            badge="Fonctionnalités"
-            title="Tout est pensé pour toi"
-            subtitle="Des outils puissants propulsés par l'IA, conçus pour t'aider à atteindre tes objectifs."
+            badge={dict.badge}
+            title={dict.title}
+            subtitle={dict.subtitle}
           />
         </AnimateOnScroll>
 
         <div
-          className="mt-16 grid lg:grid-cols-2 gap-8 lg:gap-10 items-center"
+          className="mt-16 grid lg:grid-cols-2 gap-6 items-center"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >

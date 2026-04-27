@@ -5,24 +5,24 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
 
-const navLinks = [
-  { href: "/fonctionnalites", label: "Fonctionnalités" },
-  { href: "/tarifs", label: "Tarifs" },
-  { href: "/a-propos", label: "À propos" },
-  { href: "/support", label: "Support" },
-];
+interface HeaderProps {
+  dict: {
+    navLinks: { href: string; label: string }[];
+    cta: string;
+    openMenu: string;
+    marqueeItems: string[];
+  };
+  locale: string;
+}
 
-const marqueeItems = [
-  "Essai gratuit 3 jours",
-  "Propulsé par l'IA",
-  "+100 000 utilisateurs",
-  "Scan corporel en 2 photos",
-  "Coach IA disponible 24/7",
-];
-
-export default function Header() {
+export default function Header({ dict, locale }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const localizedLinks = dict.navLinks.map((link) => ({
+    ...link,
+    href: `/${locale}${link.href}`,
+  }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,12 +32,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const switchLocale = (newLocale: string) => {
+    document.cookie = `locale=${newLocale};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
+    const path = window.location.pathname.replace(`/${locale}`, `/${newLocale}`);
+    window.location.href = path || `/${newLocale}`;
+  };
+
   return (
     <>
       {/* Animated top bar */}
       <div className="bg-dark text-white text-xs overflow-hidden relative z-50">
         <div className="animate-marquee flex whitespace-nowrap py-2">
-          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+          {[...dict.marqueeItems, ...dict.marqueeItems].map((item, i) => (
             <span key={i} className="mx-8 flex items-center gap-2">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
               {item}
@@ -57,7 +63,7 @@ export default function Header() {
               scrolled ? "h-14" : "h-16"
             }`}
           >
-            <Link href="/" className="flex items-center gap-2">
+            <Link href={`/${locale}`} className="flex items-center gap-2">
               <Image
                 src="/images/logo-slogan-black-c.png"
                 alt="MyFitScan"
@@ -71,7 +77,7 @@ export default function Header() {
             </Link>
 
             <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
+              {localizedLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -82,12 +88,28 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-3">
+              {/* Language switcher */}
+              <div className="flex items-center gap-1 text-xs text-text-muted">
+                {(["fr", "en", "de"] as const).map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => switchLocale(l)}
+                    className={`px-1.5 py-0.5 rounded transition-colors ${
+                      l === locale
+                        ? "bg-accent/10 text-accent font-semibold"
+                        : "hover:text-text"
+                    }`}
+                  >
+                    {l.toUpperCase()}
+                  </button>
+                ))}
+              </div>
               <Link
                 href="#"
                 className="inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,122,92,0.4)]"
               >
-                Télécharger l&apos;app
+                {dict.cta}
               </Link>
             </div>
 
@@ -95,7 +117,7 @@ export default function Header() {
               type="button"
               className="md:hidden p-2 text-text"
               onClick={() => setMobileOpen(true)}
-              aria-label="Ouvrir le menu"
+              aria-label={dict.openMenu}
             >
               <svg
                 className="h-6 w-6"
@@ -118,7 +140,10 @@ export default function Header() {
       <MobileMenu
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
-        links={navLinks}
+        links={localizedLinks}
+        cta={dict.cta}
+        locale={locale}
+        onSwitchLocale={switchLocale}
       />
     </>
   );

@@ -2,7 +2,15 @@ import Image from "next/image";
 import AppStoreButtons from "@/components/shared/AppStoreButtons";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 
-export default function CTABanner() {
+interface CTABannerProps {
+  dict: {
+    title: string;
+    description: string;
+  };
+  commonDict: { downloadOn: string; availableOn: string; appStore: string; googlePlay: string };
+}
+
+export default function CTABanner({ dict, commonDict }: CTABannerProps) {
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
       {/* Background image */}
@@ -24,14 +32,13 @@ export default function CTABanner() {
       <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
         <AnimateOnScroll>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Prêt à changer ta vie ?
+            {dict.title}
           </h2>
           <p className="mt-4 text-lg text-gray-300 leading-relaxed">
-            Rejoins les milliers d&apos;utilisateurs qui ont déjà transformé leur
-            quotidien avec MyFitScan. Essai gratuit de 3 jours.
+            {dict.description}
           </p>
           <div className="mt-8 flex justify-center">
-            <AppStoreButtons />
+            <AppStoreButtons dict={commonDict} />
           </div>
         </AnimateOnScroll>
       </div>

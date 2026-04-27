@@ -3,47 +3,29 @@ import Link from "next/link";
 import SectionHeading from "@/components/shared/SectionHeading";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 
-const testimonials = [
-  {
-    name: "Camille R.",
-    result: "-12 kg en 4 mois",
-    quote:
-      "MyFitScan a complètement changé ma façon de voir la nutrition. Le scan corporel m'a ouvert les yeux et le coach IA me motive chaque jour. Je n'ai jamais été aussi fière de moi !",
-    avatar: "/images/pic-profil-f1.jpg",
-  },
-  {
-    name: "Thomas L.",
-    result: "+8 kg de muscle",
-    quote:
-      "En tant que sportif, j'avais besoin d'un suivi précis. L'analyse photo des repas me fait gagner un temps fou et le plan alimentaire est parfaitement adapté à mes objectifs.",
-    avatar: "/images/pic-profil-h1.jpg",
-  },
-  {
-    name: "Sophie M.",
-    result: "Énergie +50%",
-    quote:
-      "Je ne cherchais pas à perdre du poids, juste à mieux manger. Le coach IA comprend vraiment mes besoins et me donne des conseils que même mon nutritionniste n'avait pas suggérés.",
-    avatar: "/images/pic-profil-f2.jpg",
-  },
-  {
-    name: "Lucas D.",
-    result: "-15 kg en 6 mois",
-    quote:
-      "L'app est devenue mon alliée au quotidien. Le suivi par photo est bluffant de précision, et le calendrier me permet de rester motivé en voyant mes progrès semaine après semaine.",
-    avatar: "/images/pic-profil-h2.png",
-  },
-  {
-    name: "Marc P.",
-    result: "Transformation totale",
-    quote:
-      "Après des années à tester des régimes sans résultats, MyFitScan m'a enfin donné une approche complète et durable. Le bodyscan tous les 14 jours, c'est ma meilleure motivation.",
-    avatar: "/images/pic-profil-h3.jpg",
-  },
+const avatarImages = [
+  "/images/pic-profil-f1.jpg",
+  "/images/pic-profil-h1.jpg",
+  "/images/pic-profil-f2.jpg",
+  "/images/pic-profil-h2.png",
+  "/images/pic-profil-h3.jpg",
 ];
+
+interface TestimonialsProps {
+  dict: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    items: { name: string; result: string; quote: string }[];
+    ctaText: string;
+    ctaButton: string;
+  };
+  locale: string;
+}
 
 function VerifiedBadge() {
   return (
-    <svg className="h-4 w-4 text-green" viewBox="0 0 20 20" fill="currentColor" aria-label="Vérifié">
+    <svg className="h-4 w-4 text-green" viewBox="0 0 20 20" fill="currentColor" aria-label="Verified">
       <path
         fillRule="evenodd"
         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
@@ -53,22 +35,22 @@ function VerifiedBadge() {
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({ dict, locale }: TestimonialsProps) {
   return (
     <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeading
-            badge="Témoignages"
-            title="Ils ont transformé leur vie"
-            subtitle="Découvre les résultats de ceux qui ont fait confiance à MyFitScan."
+            badge={dict.badge}
+            title={dict.title}
+            subtitle={dict.subtitle}
           />
         </AnimateOnScroll>
 
         {/* Desktop grid / Mobile horizontal carousel */}
         <div className="mt-16 -mx-4 px-4 sm:mx-0 sm:px-0">
           <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:overflow-x-visible">
-            {testimonials.map((t, i) => (
+            {dict.items.map((t, i) => (
               <AnimateOnScroll key={t.name} delay={i * 100}>
                 {/* Outer wrapper with animated gradient border */}
                 <div className="min-w-[280px] sm:min-w-0 snap-center flex-shrink-0 sm:flex-shrink rounded-2xl p-[2px] bg-gradient-to-br from-accent/30 via-green/20 to-accent/30 animate-gradient-shift h-full">
@@ -76,7 +58,7 @@ export default function Testimonials() {
                     <div className="flex items-center gap-3">
                       <div className="relative h-14 w-14 rounded-full overflow-hidden border-2 border-accent/20 flex-shrink-0">
                         <Image
-                          src={t.avatar}
+                          src={avatarImages[i] || avatarImages[0]}
                           alt={t.name}
                           fill
                           className="object-cover"
@@ -119,13 +101,13 @@ export default function Testimonials() {
         <AnimateOnScroll>
           <div className="mt-16 text-center">
             <p className="text-text-secondary mb-4">
-              Tu es créateur de contenu fitness ou lifestyle ?
+              {dict.ctaText}
             </p>
             <Link
-              href="/ambassadeur"
+              href={`/${locale}/ambassadeur`}
               className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-base font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,122,92,0.4)]"
             >
-              Devenir ambassadeur
+              {dict.ctaButton}
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
               </svg>

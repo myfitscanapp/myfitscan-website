@@ -1,25 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const productLinks = [
-  { href: "/fonctionnalites", label: "Fonctionnalités" },
-  { href: "/tarifs", label: "Tarifs" },
-];
+interface FooterProps {
+  dict: {
+    description: string;
+    productTitle: string;
+    companyTitle: string;
+    legalTitle: string;
+    copyright: string;
+    productLinks: { href: string; label: string }[];
+    companyLinks: { href: string; label: string }[];
+    legalLinks: { href: string; label: string }[];
+  };
+  locale: string;
+}
 
-const companyLinks = [
-  { href: "/a-propos", label: "À propos" },
-  { href: "/support", label: "Support" },
-  { href: "/ambassadeur", label: "Ambassadeur" },
-];
+export default function Footer({ dict, locale }: FooterProps) {
+  const localize = (href: string) => `/${locale}${href}`;
 
-const legalLinks = [
-  { href: "/mentions-legales", label: "Mentions légales" },
-  { href: "/politique-de-confidentialite", label: "Confidentialité" },
-  { href: "/conditions-utilisation", label: "CGU" },
-  { href: "/cgv", label: "CGV" },
-];
-
-export default function Footer() {
   return (
     <footer className="relative bg-dark text-white overflow-hidden">
       {/* Subtle coral glow */}
@@ -29,7 +27,7 @@ export default function Footer() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Link href="/" className="inline-block">
+            <Link href={`/${locale}`} className="inline-block">
               <Image
                 src="/images/logo-white-slogan.png"
                 alt="MyFitScan"
@@ -39,7 +37,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
-              Ton coach fitness propulsé par l&apos;intelligence artificielle.
+              {dict.description}
             </p>
             <div className="mt-5 flex items-center gap-3">
               <a
@@ -65,13 +63,13 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-accent/70 mb-4">
-              Produit
+              {dict.productTitle}
             </h3>
             <ul className="space-y-3">
-              {productLinks.map((link) => (
+              {dict.productLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={localize(link.href)}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -83,13 +81,13 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-accent/70 mb-4">
-              Entreprise
+              {dict.companyTitle}
             </h3>
             <ul className="space-y-3">
-              {companyLinks.map((link) => (
+              {dict.companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={localize(link.href)}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -101,13 +99,13 @@ export default function Footer() {
 
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-accent/70 mb-4">
-              Légal
+              {dict.legalTitle}
             </h3>
             <ul className="space-y-3">
-              {legalLinks.map((link) => (
+              {dict.legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={localize(link.href)}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -120,8 +118,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-text-muted">
-            &copy; {new Date().getFullYear()} DMC Digital LLC. Tous droits
-            réservés.
+            &copy; {new Date().getFullYear()} {dict.copyright}
           </p>
           <div className="flex items-center gap-4">
             <a

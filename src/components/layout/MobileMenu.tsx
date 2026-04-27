@@ -8,9 +8,12 @@ interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
   links: { href: string; label: string }[];
+  cta: string;
+  locale: string;
+  onSwitchLocale: (locale: string) => void;
 }
 
-export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
+export default function MobileMenu({ open, onClose, links, cta, locale, onSwitchLocale }: MobileMenuProps) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -37,17 +40,17 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       >
         <div className="flex items-center justify-between p-4 border-b border-glass-border">
           <Image
-                src="/images/logo-slogan-black-c.png"
-                alt="MyFitScan"
-                width={120}
-                height={34}
-                className="h-8 w-auto object-contain"
-              />
+            src="/images/logo-slogan-black-c.png"
+            alt="MyFitScan"
+            width={120}
+            height={34}
+            className="h-8 w-auto object-contain"
+          />
           <button
             type="button"
             onClick={onClose}
             className="p-2 text-text-secondary"
-            aria-label="Fermer le menu"
+            aria-label="Close"
           >
             <svg
               className="h-6 w-6"
@@ -76,13 +79,31 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
               {link.label}
             </Link>
           ))}
-          <div className="mt-4 pt-4 border-t border-glass-border">
+
+          {/* Language switcher */}
+          <div className="mt-2 pt-2 border-t border-glass-border flex items-center gap-2 px-4 py-2">
+            {(["fr", "en", "de"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => { onSwitchLocale(l); onClose(); }}
+                className={`px-2.5 py-1 rounded text-sm transition-colors ${
+                  l === locale
+                    ? "bg-accent/10 text-accent font-semibold"
+                    : "text-text-muted hover:text-text"
+                }`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-2 pt-2 border-t border-glass-border">
             <Link
               href="#"
               onClick={onClose}
               className="block w-full rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-white hover:bg-accent-dark transition-colors"
             >
-              Télécharger l&apos;app
+              {cta}
             </Link>
           </div>
         </nav>

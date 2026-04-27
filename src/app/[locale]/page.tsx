@@ -1,3 +1,5 @@
+import { getDictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/config";
 import HeroSection from "@/components/landing/HeroSection";
 import SocialProof from "@/components/landing/SocialProof";
 import FeatureTabs from "@/components/landing/FeatureTabs";
@@ -5,15 +7,22 @@ import Testimonials from "@/components/landing/Testimonials";
 import AmbassadorBanner from "@/components/landing/AmbassadorBanner";
 import CTABanner from "@/components/landing/CTABanner";
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+
   return (
     <>
-      <HeroSection />
-      <SocialProof />
-      <FeatureTabs />
-      <Testimonials />
-      <AmbassadorBanner />
-      <CTABanner />
+      <HeroSection dict={dict.home.hero} commonDict={dict.common} />
+      <SocialProof dict={dict.home.socialProof} />
+      <FeatureTabs dict={dict.home.features} />
+      <Testimonials dict={dict.home.testimonials} locale={locale} />
+      <AmbassadorBanner dict={dict.home.ambassadorBanner} locale={locale} />
+      <CTABanner dict={dict.home.ctaBanner} commonDict={dict.common} />
 
       <script
         type="application/ld+json"
@@ -35,8 +44,7 @@ export default function HomePage() {
               ratingValue: "4.8",
               ratingCount: "12500",
             },
-            description:
-              "MyFitScan combine scan corporel IA, suivi calorique photo et coaching personnel pour un accompagnement personnalisé et durable.",
+            description: dict.metadata.siteDescription,
           }),
         }}
       />

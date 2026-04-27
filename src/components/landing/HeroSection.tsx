@@ -9,7 +9,20 @@ const avatars = [
   { src: "/images/pic-profil-h3.jpg", alt: "Marc" },
 ];
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  dict: {
+    badge: string;
+    titleLine1: string;
+    titleLine2: string;
+    description: string;
+    usersCount: string;
+    usersTrust: string;
+    heroImageAlt: string;
+  };
+  commonDict: { downloadOn: string; availableOn: string; appStore: string; googlePlay: string };
+}
+
+export default function HeroSection({ dict, commonDict }: HeroSectionProps) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-hero-from to-hero-to">
       {/* Subtle glow effects */}
@@ -22,23 +35,21 @@ export default function HeroSection() {
           <div className="animate-fade-in-up">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur-sm border border-glass-border px-4 py-1.5 text-sm font-medium text-text-secondary">
               <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse" />
-              Propulsé par l&apos;intelligence artificielle
+              {dict.badge}
             </span>
 
             <h1 className="mt-6 font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text leading-[1.1] tracking-tight">
-              Atteins tes objectifs.
+              {dict.titleLine1}
               <br />
-              <span className="text-accent">Chaque jour.</span>
+              <span className="text-accent">{dict.titleLine2}</span>
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-text-secondary leading-relaxed max-w-xl">
-              MyFitScan combine scan corporel IA, suivi calorique photo et
-              coaching personnel pour t&apos;offrir un accompagnement
-              personnalisé et durable.
+              {dict.description}
             </p>
 
             <div className="mt-8">
-              <AppStoreButtons />
+              <AppStoreButtons dict={commonDict} />
             </div>
 
             <div className="mt-8 flex items-center gap-3">
@@ -59,8 +70,8 @@ export default function HeroSection() {
                 ))}
               </div>
               <p className="text-sm text-text-secondary">
-                <span className="font-semibold text-text">+100 000</span>{" "}
-                utilisateurs nous font déjà confiance
+                <span className="font-semibold text-text">{dict.usersCount}</span>{" "}
+                {dict.usersTrust}
               </p>
             </div>
           </div>
@@ -70,7 +81,7 @@ export default function HeroSection() {
             <div className="relative w-full max-w-lg">
               <Image
                 src="/images/design-hero-app.png"
-                alt="MyFitScan - BodyScan et Dashboard"
+                alt={dict.heroImageAlt}
                 width={600}
                 height={700}
                 className="relative z-10 w-full h-auto drop-shadow-2xl"
