@@ -117,26 +117,26 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
         </AnimateOnScroll>
 
         <div
-          className="mt-8 sm:mt-16 grid lg:grid-cols-2 gap-6 items-center"
+          className="mt-8 sm:mt-16 flex flex-col lg:grid lg:grid-cols-2 lg:gap-6 lg:items-center"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Left - Tabs */}
           <AnimateOnScroll>
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-2">
               {features.map((feature, index) => {
                 const isActive = index === activeIndex;
                 return (
                   <button
                     key={feature.id}
                     onClick={() => goToTab(index)}
-                    className={`w-full text-left rounded-2xl border transition-all duration-300 overflow-hidden ${
+                    className={`w-full text-left rounded-2xl border transition-colors duration-300 overflow-hidden ${
                       isActive
                         ? "bg-white border-accent/20 shadow-lg"
                         : "bg-white/50 border-glass-border hover:bg-white/80"
                     }`}
                   >
-                    <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-5">
+                    <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-5">
                       <div
                         className={`flex-shrink-0 inline-flex items-center justify-center h-9 w-9 sm:h-11 sm:w-11 rounded-xl transition-colors duration-300 ${
                           isActive
@@ -166,14 +166,24 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
 
                     {/* Expanded content */}
                     <div
-                      className={`overflow-hidden transition-all duration-500 ${
-                        isActive ? "max-h-40 lg:max-h-60" : "max-h-0"
+                      className={`overflow-hidden transition-[max-height] duration-500 ${
+                        isActive ? "max-h-[420px] lg:max-h-60" : "max-h-0"
                       }`}
                     >
-                      <div className="px-3.5 pb-4 pt-0 sm:px-5 sm:pb-5">
+                      <div className="px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
                         <p className="text-sm text-text-secondary leading-relaxed">
                           {feature.description}
                         </p>
+                        {/* Mobile inline screenshot */}
+                        <div className="lg:hidden flex justify-center mt-3">
+                          <Image
+                            src={feature.image}
+                            alt={feature.title}
+                            width={160}
+                            height={320}
+                            className="w-28 h-auto rounded-2xl shadow-md"
+                          />
+                        </div>
                         {/* Progress bar */}
                         <div className="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
                           <div
@@ -188,27 +198,6 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
               })}
             </div>
           </AnimateOnScroll>
-
-          {/* Mobile: Screenshot below tabs */}
-          <div className="lg:hidden flex justify-center mt-6">
-            <div className="relative w-44 sm:w-52 h-auto">
-              {features.map((feature, index) => (
-                <Image
-                  key={feature.id}
-                  src={feature.image}
-                  alt={feature.title}
-                  width={280}
-                  height={560}
-                  className={`w-full h-auto rounded-[24px] shadow-lg transition-opacity duration-500 ${
-                    index === activeIndex
-                      ? "opacity-100 relative"
-                      : "opacity-0 absolute inset-0"
-                  }`}
-                  priority={index === 0}
-                />
-              ))}
-            </div>
-          </div>
 
           {/* Right - iPhone screenshot (desktop only) */}
           <AnimateOnScroll delay={200} className="hidden lg:flex justify-center items-center">
