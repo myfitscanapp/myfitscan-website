@@ -4,6 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
 
+const localeConfig = {
+  fr: { flag: "\u{1F1EB}\u{1F1F7}", label: "Fran\u00e7ais", short: "FR" },
+  en: { flag: "\u{1F1EC}\u{1F1E7}", label: "English", short: "EN" },
+  de: { flag: "\u{1F1E9}\u{1F1EA}", label: "Deutsch", short: "DE" },
+} as const;
+
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
@@ -80,19 +86,25 @@ export default function MobileMenu({ open, onClose, links, cta, locale, onSwitch
             </Link>
           ))}
 
-          {/* Language switcher */}
-          <div className="mt-2 pt-2 border-t border-glass-border flex items-center gap-2 px-4 py-2">
+          {/* Language switcher with flags */}
+          <div className="mt-2 pt-2 border-t border-glass-border px-2">
             {(["fr", "en", "de"] as const).map((l) => (
               <button
                 key={l}
                 onClick={() => { onSwitchLocale(l); onClose(); }}
-                className={`px-2.5 py-1 rounded text-sm transition-colors ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   l === locale
                     ? "bg-accent/10 text-accent font-semibold"
-                    : "text-text-muted hover:text-text"
+                    : "text-text-secondary hover:bg-gray-50"
                 }`}
               >
-                {l.toUpperCase()}
+                <span className="text-lg leading-none">{localeConfig[l].flag}</span>
+                <span>{localeConfig[l].label}</span>
+                {l === locale && (
+                  <svg className="h-4 w-4 ml-auto text-accent" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                )}
               </button>
             ))}
           </div>
