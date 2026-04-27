@@ -49,7 +49,7 @@ export default function Testimonials({ dict, locale }: TestimonialsProps) {
 
         {/* Desktop grid / Mobile horizontal carousel */}
         <div className="mt-16 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 touch-pan-x overscroll-x-contain sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:overflow-x-visible sm:touch-auto sm:overscroll-auto">
+          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 overscroll-x-contain sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:overflow-x-visible sm:overscroll-auto">
             {dict.items.map((t, i) => (
               <AnimateOnScroll key={t.name} delay={i * 100}>
                 {/* Outer wrapper with animated gradient border */}

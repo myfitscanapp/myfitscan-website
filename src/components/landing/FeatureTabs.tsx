@@ -60,11 +60,13 @@ interface FeatureTabsProps {
 }
 
 export default function FeatureTabs({ dict }: FeatureTabsProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const features = featureData.map((f, i) => ({
     ...f,
@@ -73,13 +75,26 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
   }));
 
   const goToTab = useCallback((index: number) => {
-    setActiveIndex(index);
+    setActiveIndex((prev) => (prev === index ? null : index));
     setProgress(0);
   }, []);
 
-  // Auto-play
+  // Pause autoplay when section is not visible
   useEffect(() => {
-    if (isPaused) {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-play (only when visible and not paused)
+  const shouldPlay = isVisible && !isPaused && activeIndex !== null;
+  useEffect(() => {
+    if (!shouldPlay) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (progressRef.current) clearInterval(progressRef.current);
       return;
@@ -95,7 +110,7 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
 
     // Tab switch
     intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % features.length);
+      setActiveIndex((prev) => ((prev ?? -1) + 1) % features.length);
       setProgress(0);
     }, AUTOPLAY_INTERVAL);
 
@@ -103,10 +118,10 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (progressRef.current) clearInterval(progressRef.current);
     };
-  }, [isPaused, activeIndex, features.length]);
+  }, [shouldPlay, activeIndex, features.length]);
 
   return (
-    <section className="py-12 sm:py-20 lg:py-28 bg-gradient-to-br from-hero-from to-hero-to">
+    <section ref={sectionRef} className="py-12 sm:py-20 lg:py-28 bg-gradient-to-br from-hero-from to-hero-to">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeading
