@@ -106,7 +106,7 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
   }, [isPaused, activeIndex, features.length]);
 
   return (
-    <section className="py-20 sm:py-28 bg-gradient-to-br from-hero-from to-hero-to">
+    <section className="py-12 sm:py-20 lg:py-28 bg-gradient-to-br from-hero-from to-hero-to">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeading
@@ -117,13 +117,13 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
         </AnimateOnScroll>
 
         <div
-          className="mt-16 grid lg:grid-cols-2 gap-6 items-center"
+          className="mt-8 sm:mt-16 grid lg:grid-cols-2 gap-6 items-center"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Left - Tabs */}
           <AnimateOnScroll>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {features.map((feature, index) => {
                 const isActive = index === activeIndex;
                 return (
@@ -136,9 +136,9 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                         : "bg-white/50 border-glass-border hover:bg-white/80"
                     }`}
                   >
-                    <div className="flex items-center gap-4 p-5">
+                    <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-5">
                       <div
-                        className={`flex-shrink-0 inline-flex items-center justify-center h-11 w-11 rounded-xl transition-colors duration-300 ${
+                        className={`flex-shrink-0 inline-flex items-center justify-center h-9 w-9 sm:h-11 sm:w-11 rounded-xl transition-colors duration-300 ${
                           isActive
                             ? "bg-accent/10 text-accent"
                             : "bg-gray-100 text-text-secondary"
@@ -147,7 +147,7 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                         {feature.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-heading text-base font-bold text-text">
+                        <h3 className="font-heading text-sm sm:text-base font-bold text-text">
                           {feature.title}
                         </h3>
                       </div>
@@ -167,10 +167,10 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                     {/* Expanded content */}
                     <div
                       className={`overflow-hidden transition-all duration-500 ${
-                        isActive ? "max-h-60" : "max-h-0"
+                        isActive ? "max-h-[480px] sm:max-h-[520px] lg:max-h-60" : "max-h-0"
                       }`}
                     >
-                      <div className="px-5 pb-5 pt-0">
+                      <div className="px-3.5 pb-4 pt-0 sm:px-5 sm:pb-5">
                         <p className="text-sm text-text-secondary leading-relaxed">
                           {feature.description}
                         </p>
@@ -183,14 +183,14 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                         </div>
 
                         {/* Mobile: Show screenshot inline */}
-                        <div className="lg:hidden mt-5 flex justify-center">
-                          <div className="relative w-48 h-auto">
+                        <div className="lg:hidden mt-4 flex justify-center">
+                          <div className="relative w-40 sm:w-52 h-auto">
                             <Image
                               src={feature.image}
                               alt={feature.title}
                               width={280}
                               height={560}
-                              className="w-full h-auto rounded-2xl"
+                              className="w-full h-auto rounded-[20px] shadow-md"
                             />
                           </div>
                         </div>
