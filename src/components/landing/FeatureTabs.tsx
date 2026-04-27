@@ -197,23 +197,23 @@ export default function FeatureTabs() {
           </AnimateOnScroll>
 
           {/* Right - iPhone screenshot (desktop only) */}
-          <AnimateOnScroll delay={200} className="hidden lg:flex justify-center">
-            <div className="relative w-80 h-auto">
+          <AnimateOnScroll delay={200} className="hidden lg:flex justify-center items-center">
+            <div className="relative w-72 max-h-[580px] flex items-center justify-center">
               {features.map((feature, index) => (
                 <div
                   key={feature.id}
                   className={`transition-all duration-500 ${
                     index === activeIndex
                       ? "opacity-100 scale-100"
-                      : "opacity-0 scale-95 absolute inset-0"
+                      : "opacity-0 scale-95 absolute inset-0 flex items-center justify-center"
                   }`}
                 >
                   <Image
                     src={feature.image}
                     alt={feature.title}
-                    width={320}
-                    height={640}
-                    className="w-full h-auto rounded-3xl"
+                    width={288}
+                    height={580}
+                    className="w-auto h-auto max-h-[580px] max-w-full rounded-3xl object-contain"
                     priority={index === 0}
                   />
                 </div>
