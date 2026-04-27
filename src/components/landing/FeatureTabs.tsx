@@ -167,7 +167,7 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                     {/* Expanded content */}
                     <div
                       className={`overflow-hidden transition-all duration-500 ${
-                        isActive ? "max-h-[480px] sm:max-h-[520px] lg:max-h-60" : "max-h-0"
+                        isActive ? "max-h-40 lg:max-h-60" : "max-h-0"
                       }`}
                     >
                       <div className="px-3.5 pb-4 pt-0 sm:px-5 sm:pb-5">
@@ -175,24 +175,11 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
                           {feature.description}
                         </p>
                         {/* Progress bar */}
-                        <div className="mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-accent rounded-full transition-all duration-100 ease-linear"
                             style={{ width: `${isActive ? progress : 0}%` }}
                           />
-                        </div>
-
-                        {/* Mobile: Show screenshot inline */}
-                        <div className="lg:hidden mt-4 flex justify-center">
-                          <div className="relative w-40 sm:w-52 h-auto">
-                            <Image
-                              src={feature.image}
-                              alt={feature.title}
-                              width={280}
-                              height={560}
-                              className="w-full h-auto rounded-[20px] shadow-md"
-                            />
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -201,6 +188,27 @@ export default function FeatureTabs({ dict }: FeatureTabsProps) {
               })}
             </div>
           </AnimateOnScroll>
+
+          {/* Mobile: Screenshot below tabs */}
+          <div className="lg:hidden flex justify-center mt-6">
+            <div className="relative w-44 sm:w-52 h-auto">
+              {features.map((feature, index) => (
+                <Image
+                  key={feature.id}
+                  src={feature.image}
+                  alt={feature.title}
+                  width={280}
+                  height={560}
+                  className={`w-full h-auto rounded-[24px] shadow-lg transition-opacity duration-500 ${
+                    index === activeIndex
+                      ? "opacity-100 relative"
+                      : "opacity-0 absolute inset-0"
+                  }`}
+                  priority={index === 0}
+                />
+              ))}
+            </div>
+          </div>
 
           {/* Right - iPhone screenshot (desktop only) */}
           <AnimateOnScroll delay={200} className="hidden lg:flex justify-center items-center">
